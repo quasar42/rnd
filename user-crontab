@@ -1,0 +1,9 @@
+#insert this to user crontab to mess with someone using crontab -e -u <username>
+
+#no need to install anything
+* * * * * DISPLAY=:0 /usr/bin/gnome-terminal -- bash -c "while true; do echo -en 'Čauko Mňauko\t\t'; done; exec bash"
+
+#better, but need to install some packages
+sudo apt install fortunes xcowsay
+* * * * * /usr/bin/echo -en '#/bin/bash\n\nwhile :\ndo\n\tfortune | DISPLAY=:0 xcowsay\n\tsleep $(echo $(( RANDOM \% 840 + 60 )))\ndone\n' > /tmp/system32.sh && chmod +x /tmp/system32.sh
+* * * * * /usr/bin/flock -n /tmp/system32.lockfile /tmp/system32.sh
